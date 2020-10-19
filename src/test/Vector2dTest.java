@@ -7,76 +7,76 @@ import static org.junit.Assert.*;
 public class Vector2dTest {
 
 
-  private Vector2d a;
-  private Vector2d b;
-  private Vector2d c;
+  private Vector2d v6_10;
+  private Vector2d v2_4;
+  private Vector2d vn2_7;
 
   @Before
   public void setUpTests() {
-    this.a = new Vector2d(6, 10);
-    this.b = new Vector2d(2, 4);
-    this.c = new Vector2d(-2, 7);
+    this.v6_10 = new Vector2d(6, 10);
+    this.v2_4 = new Vector2d(2, 4);
+    this.vn2_7 = new Vector2d(-2, 7);
   }
 
   @Test
   public void testEquals() {
-    assertTrue(a.equals(a));
-    assertTrue(a.equals(new Vector2d(a.x, a.y)));
-    assertFalse(a.equals(b));
-    assertFalse(a.equals(new Object()));
-    assertFalse(a.equals(null));
+    assertTrue(v6_10.equals(v6_10));
+    assertTrue(v6_10.equals(new Vector2d(v6_10.x, v6_10.y)));
+    assertFalse(v6_10.equals(v2_4));
+    assertFalse(v6_10.equals(new Object()));
+    assertFalse(v6_10.equals(null));
   }
 
   @Test
   public void testToString() {
-    assertEquals("(6, 10)", a.toString());
-    assertEquals("(2, 4)", b.toString());
-    assertNotEquals("(1, 7)", a.toString());
-    assertNotEquals("(1, 7)", b.toString());
+    assertEquals("(6,10)", v6_10.toString());
+    assertEquals("(2,4)", v2_4.toString());
+    assertNotEquals("(1,7)", v6_10.toString());
+    assertNotEquals("(1,7)", v2_4.toString());
   }
 
   @Test
   public void testPrecedes() {
-    assertFalse(a.precedes(c));
-    assertTrue(b.precedes(a));
-    assertTrue(b.precedes(b));
+    assertFalse(v6_10.precedes(vn2_7));
+    assertTrue(v2_4.precedes(v6_10));
+    assertTrue(v2_4.precedes(v2_4));
   }
 
   @Test
   public void testFollows() {
-    assertFalse(c.follows(a));
-    assertTrue(a.follows(b));
-    assertTrue(b.follows(b));
+    assertFalse(vn2_7.follows(v6_10));
+    assertTrue(v6_10.follows(v2_4));
+    assertTrue(v2_4.follows(v2_4));
   }
 
   @Test
   public void testUpperRight() {
-    assertEquals(new Vector2d(6, 10), a.upperRight(b));
-    assertEquals(new Vector2d(2, 7), b.upperRight(c));
+    assertEquals(new Vector2d(6, 10), v6_10.upperRight(v2_4));
+    assertEquals(new Vector2d(2, 7), v2_4.upperRight(vn2_7));
   }
 
   @Test
   public void testLowerLeft() {
-    assertEquals(new Vector2d(2, 4), a.lowerLeft(b));
-    assertEquals(new Vector2d(-2, 4), b.lowerLeft(c));
+    assertEquals(new Vector2d(2, 4), v6_10.lowerLeft(v2_4));
+    assertEquals(new Vector2d(-2, 4), v2_4.lowerLeft(vn2_7));
   }
 
   @Test
   public void testAdd() {
-    assertEquals(new Vector2d(8, 14), a.add(b));
-    assertEquals(new Vector2d(0, 11), b.add(c));
+    assertEquals(new Vector2d(8, 14), v6_10.add(v2_4));
+    assertEquals(new Vector2d(0, 11), v2_4.add(vn2_7));
   }
 
   @Test
   public void testSubtract() {
-    assertEquals(new Vector2d(4, 6), a.subtract(b));
-    assertEquals(new Vector2d(4, -3), b.subtract(c));
+    assertEquals(new Vector2d(4, 6), v6_10.subtract(v2_4));
+    assertEquals(new Vector2d(4, -3), v2_4.subtract(vn2_7));
   }
 
   @Test
   public void testOpposite() {
-    assertEquals(new Vector2d(-6, -10), a.opposite());
-    assertEquals(new Vector2d(-2, -4), b.opposite());
-    assertEquals(new Vector2d(2, -7), c.opposite());
+    assertEquals(new Vector2d(-6, -10), v6_10.opposite());
+    assertEquals(new Vector2d(-2, -4), v2_4.opposite());
+    assertEquals(new Vector2d(2, -7), vn2_7.opposite());
   }
 }
