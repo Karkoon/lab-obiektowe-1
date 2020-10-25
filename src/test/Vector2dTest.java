@@ -1,5 +1,5 @@
 import agh.cs.lab2.Vector2d;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,8 +12,8 @@ public class Vector2dTest {
   private static Vector2d v2_4;
   private static Vector2d vn2_7;
 
-  @BeforeAll
-  public static void setUpTests() {
+  @BeforeEach
+  public void setUpTests() {
     v6_10 = new Vector2d(6, 10);
     v2_4 = new Vector2d(2, 4);
     vn2_7 = new Vector2d(-2, 7);
