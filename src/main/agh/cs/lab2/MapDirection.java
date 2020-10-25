@@ -7,11 +7,11 @@ public enum MapDirection {
   WEST("Zachód", new Vector2d(-1, 0));
 
   private final String friendlyName;
-  private final Vector2d unitVectorDirection;
+  private final Vector2d unitVector;
 
-  MapDirection(String friendlyName, Vector2d unitVectorDirection) {
+  MapDirection(String friendlyName, Vector2d unitVector) {
     this.friendlyName = friendlyName;
-    this.unitVectorDirection = unitVectorDirection;
+    this.unitVector = unitVector;
   }
 
   @Override
@@ -30,7 +30,7 @@ public enum MapDirection {
   }
 
   public Vector2d toUnitVector() {
-    return unitVectorDirection;
+    return unitVector;
   }
 
 }
