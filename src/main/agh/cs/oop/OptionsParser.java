@@ -1,13 +1,13 @@
 package agh.cs.oop;
 
-import java.util.Set;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class OptionsParser {
   public MoveDirection[] parse(String[] args) {
     return Stream.of(args)
-      .filter(this::isUnderstandable)
       .map(this::toMoveDirection)
+      .filter(Objects::nonNull)
       .toArray(MoveDirection[]::new);
   }
 
@@ -20,13 +20,5 @@ public class OptionsParser {
       case "l", "left" -> MoveDirection.LEFT;
       default -> null;
     };
-  }
-
-  private boolean isUnderstandable(String str) {
-    Set<String> words = Set.of(
-      "f", "forward", "b", "backward",
-      "r", "right", "l", "left"
-    );
-    return words.contains(str);
   }
 }
