@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static agh.cs.lab2.MapDirection.*;
+import static agh.cs.oop.MapDirection.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MapDirectionTest {

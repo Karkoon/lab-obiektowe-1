@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+package agh.cs.oop;
 
 public enum MapDirection {
   NORTH("Północ", new Vector2d(0, 1)),

@@ -1,10 +1,8 @@
-package agh.cs.lab3;
-
-import agh.cs.lab2.MapDirection;
-import agh.cs.lab2.MoveDirection;
-import agh.cs.lab2.Vector2d;
+package agh.cs.oop;
 
 public class Animal {
+  private final Vector2d lowerBound = new Vector2d(0, 0);
+  private final Vector2d upperBound = new Vector2d(4, 4);
   private MapDirection orientation = MapDirection.NORTH;
   private Vector2d position = new Vector2d(2, 2);
 
@@ -29,6 +27,6 @@ public class Animal {
   }
 
   private boolean isInBounds(Vector2d position) {
-    return !(position.x < 0 || position.y < 0 || position.x > 4 || position.y > 4);
+    return lowerBound.precedes(position) && upperBound.follows(position);
   }
 }

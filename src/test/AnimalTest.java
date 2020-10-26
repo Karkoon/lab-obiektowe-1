@@ -1,5 +1,5 @@
-import agh.cs.lab2.MoveDirection;
-import agh.cs.lab3.Animal;
+import agh.cs.oop.MoveDirection;
+import agh.cs.oop.Animal;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

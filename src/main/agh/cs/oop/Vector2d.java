@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+package agh.cs.oop;
 
 import java.util.Objects;
 

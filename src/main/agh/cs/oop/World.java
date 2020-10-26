@@ -1,10 +1,8 @@
-package agh.cs.lab3;
-
-import agh.cs.lab2.MoveDirection;
+package agh.cs.oop;
 
 public class World {
   public static void main(String[] args) {
-    /*Animal animal = new Animal();
+        /*Animal animal = new Animal();
     System.out.println(animal.toString());
     animal.move(MoveDirection.RIGHT);
     animal.move(MoveDirection.FORWARD);
@@ -21,6 +19,7 @@ public class World {
       animal.move(direction);
     }
     System.out.println(animal.toString());
+
 
   }
 }

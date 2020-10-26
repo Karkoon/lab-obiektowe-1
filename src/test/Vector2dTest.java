@@ -1,4 +1,4 @@
-import agh.cs.lab2.Vector2d;
+import agh.cs.oop.Vector2d;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
