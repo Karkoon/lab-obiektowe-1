@@ -7,5 +7,14 @@ public class World {
     Vector2d position2 = new Vector2d(-2, 1);
     System.out.println(position2);
     System.out.println(position1.add(position2));
+
+    System.out.println("########");
+
+    MapDirection mapDirection = MapDirection.NORTH;
+    System.out.println(mapDirection);
+    System.out.println(mapDirection.toUnitVector());
+    System.out.println(mapDirection.next());
+    System.out.println(mapDirection.previous());
+
   }
 }
