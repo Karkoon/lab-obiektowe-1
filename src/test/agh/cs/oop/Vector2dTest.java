@@ -1,4 +1,5 @@
-import agh.cs.oop.Vector2d;
+package agh.cs.oop;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

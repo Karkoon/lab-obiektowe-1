@@ -1,3 +1,5 @@
+package agh.cs.oop;
+
 import org.junit.jupiter.api.Test;
 
 import static agh.cs.oop.MapDirection.*;

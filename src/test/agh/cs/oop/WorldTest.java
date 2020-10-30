@@ -1,6 +1,5 @@
-import agh.cs.oop.Animal;
-import agh.cs.oop.MoveDirection;
-import agh.cs.oop.OptionsParser;
+package agh.cs.oop;
+
 import org.junit.jupiter.api.Test;
 
 import static agh.cs.oop.MoveDirection.*;

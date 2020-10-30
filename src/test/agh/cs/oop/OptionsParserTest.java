@@ -1,5 +1,5 @@
-import agh.cs.oop.MoveDirection;
-import agh.cs.oop.OptionsParser;
+package agh.cs.oop;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

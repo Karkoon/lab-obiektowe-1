@@ -2,14 +2,6 @@ package agh.cs.oop;
 
 public class World {
   public static void main(String[] args) {
-        /*Animal animal = new Animal();
-    System.out.println(animal.toString());
-    animal.move(MoveDirection.RIGHT);
-    animal.move(MoveDirection.FORWARD);
-    animal.move(MoveDirection.FORWARXD);
-    animal.move(MoveDirection.FORWARD);
-    System.out.println(animal.toString());
-    */
 
     Animal animal = new Animal();
     System.out.println(animal.toString());
