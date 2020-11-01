@@ -22,5 +22,4 @@ public class MapDirectionTest {
     assertEquals(EAST, SOUTH.previous());
     assertEquals(NORTH, EAST.previous());
   }
-
 }

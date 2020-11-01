@@ -32,5 +32,4 @@ public enum MapDirection {
   public Vector2d toUnitVector() {
     return unitVector;
   }
-
 }

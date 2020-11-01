@@ -11,7 +11,5 @@ public class World {
       animal.move(direction);
     }
     System.out.println(animal.toString());
-
-
   }
 }
