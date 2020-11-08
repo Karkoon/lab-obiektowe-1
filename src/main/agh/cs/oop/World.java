@@ -1,15 +1,11 @@
 package agh.cs.oop;
 
 public class World {
-  public static void main(String[] args) {
-
-    Animal animal = new Animal();
-    System.out.println(animal.toString());
-    OptionsParser parser = new OptionsParser();
-    MoveDirection[] directions = parser.parse(args);
-    for (var direction : directions) {
-      animal.move(direction);
-    }
-    System.out.println(animal.toString());
+  public static void main(String[] args) throws InterruptedException {
+    MoveDirection[] directions = new OptionsParser().parse(args);
+    IWorldMap map = new RectangularMap(10, 5);
+    Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+    IEngine engine = new SimulationEngine(directions, map, positions);
+    engine.run();
   }
 }

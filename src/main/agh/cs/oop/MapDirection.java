@@ -1,10 +1,10 @@
 package agh.cs.oop;
 
 public enum MapDirection {
-  NORTH("Północ", new Vector2d(0, 1)),
-  EAST("Wschód", new Vector2d(1, 0)),
-  SOUTH("Południe", new Vector2d(0, -1)),
-  WEST("Zachód", new Vector2d(-1, 0));
+  NORTH("^", new Vector2d(0, 1)),
+  EAST(">", new Vector2d(1, 0)),
+  SOUTH("v", new Vector2d(0, -1)),
+  WEST("<", new Vector2d(-1, 0));
 
   private final String friendlyName;
   private final Vector2d unitVector;
