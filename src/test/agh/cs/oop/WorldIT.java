@@ -26,7 +26,7 @@ public class WorldIT {
     // czy zwierze przemieszcza się na właściwe pozycje
     // czy zwierze wychodzi poza mapę
     Vector2d[] expectedFinalPositions = {new Vector2d(2, 0), new Vector2d(3, 4)};
-    for (var expectedFinalPosition : expectedFinalPositions) {
+    for (Vector2d expectedFinalPosition : expectedFinalPositions) {
       assertNotNull(map.objectAt(expectedFinalPosition));
     }
 

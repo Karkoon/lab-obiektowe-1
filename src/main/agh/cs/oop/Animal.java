@@ -1,13 +1,17 @@
 package agh.cs.oop;
 
-public class Animal {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Animal extends AbstractMapElement {
+
   private final IWorldMap map;
+  private final List<IPositionChangeObserver> positionChangeObserverList = new ArrayList<>();
   private MapDirection orientation = MapDirection.NORTH;
-  private Vector2d position;
 
   public Animal(IWorldMap map, Vector2d initialPosition) {
+    super(initialPosition);
     this.map = map;
-    position = initialPosition;
     placeOnMap(map);
   }
 
@@ -15,8 +19,8 @@ public class Animal {
     this(map, new Vector2d(2, 2));
   }
 
-  public Vector2d getPosition() {
-    return position;
+  public void registerPositionChangeObserver(IPositionChangeObserver observer) {
+    positionChangeObserverList.add(observer);
   }
 
   @Override
@@ -47,6 +51,7 @@ public class Animal {
       default -> throw new IllegalArgumentException("Illegal direction value. It has to be either FORWARD or BACKWARD.");
     }
     if (map.canMoveTo(resultPosition)) {
+      positionChangeObserverList.forEach(a -> a.positionChanged(position, resultPosition));
       position = resultPosition;
     }
   }

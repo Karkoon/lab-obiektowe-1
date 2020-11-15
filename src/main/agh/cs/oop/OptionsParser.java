@@ -11,7 +11,6 @@ public class OptionsParser {
       .toArray(MoveDirection[]::new);
   }
 
-
   private MoveDirection toMoveDirection(String str) {
     return switch (str) {
       case "f", "forward" -> MoveDirection.FORWARD;
