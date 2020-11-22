@@ -13,7 +13,7 @@ public class SimulationEngine implements IEngine {
     animals = new LinkedList<>();
     for (Vector2d position : initialAnimalPositions) {
       Animal animal = new Animal(map, position);
-      animal.registerPositionChangeObserver(map);
+      animal.addObserver(map);
       animals.add(animal);
     }
   }

@@ -2,6 +2,7 @@ package agh.cs.oop;
 
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
 
@@ -9,7 +10,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
   private final MapVisualizer mapVisualizer;
 
   public AbstractWorldMap() {
-    elementsMap = new HashMap<>();
+    elementsMap = new LinkedHashMap<>();
     mapVisualizer = new MapVisualizer(this);
   }
 

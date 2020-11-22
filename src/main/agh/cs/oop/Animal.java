@@ -19,8 +19,12 @@ public class Animal extends AbstractMapElement {
     this(map, new Vector2d(2, 2));
   }
 
-  public void registerPositionChangeObserver(IPositionChangeObserver observer) {
+  void addObserver(IPositionChangeObserver observer) {
     positionChangeObserverList.add(observer);
+  }
+  
+  void removeObserver(IPositionChangeObserver observer) {
+    positionChangeObserverList.remove(observer);
   }
 
   @Override
@@ -51,8 +55,9 @@ public class Animal extends AbstractMapElement {
       default -> throw new IllegalArgumentException("Illegal direction value. It has to be either FORWARD or BACKWARD.");
     }
     if (map.canMoveTo(resultPosition)) {
-      positionChangeObserverList.forEach(a -> a.positionChanged(position, resultPosition));
+      Vector2d oldPosition = position;
       position = resultPosition;
+      positionChangeObserverList.forEach(a -> a.positionChanged(oldPosition, resultPosition));
     }
   }
 

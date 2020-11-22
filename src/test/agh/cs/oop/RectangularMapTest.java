@@ -74,7 +74,7 @@ class RectangularMapTest {
     Vector2d pos1 = new Vector2d(5, 5);
     Vector2d pos2 = pos1.add(MapDirection.NORTH.toUnitVector());
     Animal animal = new Animal(rectangularMap, pos1);
-    animal.registerPositionChangeObserver(rectangularMap);
+    animal.addObserver(rectangularMap);
     assertTrue(rectangularMap.elementsMap.containsKey(pos1));
     assertFalse(rectangularMap.elementsMap.containsKey(pos2));
     animal.move(MoveDirection.FORWARD);

@@ -73,7 +73,7 @@ public class GrassFieldTest {
     Vector2d pos1 = new Vector2d(-10, -10);
     Vector2d pos2 = pos1.add(MapDirection.NORTH.toUnitVector());
     Animal animal = new Animal(grassField, pos1);
-    animal.registerPositionChangeObserver(grassField);
+    animal.addObserver(grassField);
     assertTrue(grassField.elementsMap.containsKey(pos1));
     assertFalse(grassField.elementsMap.containsKey(pos2));
     animal.move(MoveDirection.FORWARD);
