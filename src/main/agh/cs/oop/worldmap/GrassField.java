@@ -1,35 +1,39 @@
-package agh.cs.oop;
+package agh.cs.oop.worldmap;
+
+import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.Animal;
+import agh.cs.oop.mapelement.Grass;
+import agh.cs.oop.mapelement.IMapElement;
 
 import java.util.Random;
 
 public class GrassField extends AbstractWorldMap {
 
+  private final MapBoundary mapBoundary;
+
   public GrassField(int grassAmount) {
-    super();
+    this.mapBoundary = new MapBoundary();
     generateGrass(grassAmount);
   }
 
+
   @Override
-  protected MapBounds provideMapBounds() {
-    Vector2d lowerLeftCorner = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-    Vector2d upperRightCorner = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
-    for (Vector2d position : elementsMap.keySet()) {
-      lowerLeftCorner = position.lowerLeft(lowerLeftCorner);
-      upperRightCorner = position.upperRight(upperRightCorner);
-    }
-    return new MapBounds(lowerLeftCorner, upperRightCorner);
+  public IMapBoundary provideMapBoundary() {
+    return mapBoundary;
   }
 
   @Override
   public boolean place(Animal animal) {
     removeAndRegenerateGrassIfPresentAt(animal.getPosition());
+    animal.addObserver(mapBoundary);
+    mapBoundary.addToMapBoundary(animal);
     return super.place(animal);
   }
 
   @Override
-  public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+  public void positionChanged(Vector2d oldPosition, Vector2d newPosition, IMapElement changedElement) {
     removeAndRegenerateGrassIfPresentAt(newPosition);
-    super.positionChanged(oldPosition, newPosition);
+    super.positionChanged(oldPosition, newPosition, changedElement);
   }
 
   private void removeAndRegenerateGrassIfPresentAt(Vector2d position) {
@@ -48,7 +52,10 @@ public class GrassField extends AbstractWorldMap {
       do {
         potentialPosition = new Vector2d(rand.nextInt(upperBound), rand.nextInt(upperBound));
       } while (isOccupied(potentialPosition));
-      elementsMap.put(potentialPosition, new Grass(potentialPosition));
+      Grass grass = new Grass(potentialPosition);
+      grass.addObserver(mapBoundary);
+      mapBoundary.addToMapBoundary(grass);
+      elementsMap.put(potentialPosition, grass);
     }
   }
 }

@@ -1,12 +1,15 @@
-package agh.cs.oop;
+package agh.cs.oop.mapelement;
 
-import java.util.ArrayList;
-import java.util.List;
+import agh.cs.oop.MapDirection;
+import agh.cs.oop.MoveDirection;
+import agh.cs.oop.Vector2d;
+import agh.cs.oop.worldmap.IWorldMap;
 
 public class Animal extends AbstractMapElement {
 
+  private final static int Z_INDEX = 10;
+
   private final IWorldMap map;
-  private final List<IPositionChangeObserver> positionChangeObserverList = new ArrayList<>();
   private MapDirection orientation = MapDirection.NORTH;
 
   public Animal(IWorldMap map, Vector2d initialPosition) {
@@ -19,13 +22,6 @@ public class Animal extends AbstractMapElement {
     this(map, new Vector2d(2, 2));
   }
 
-  void addObserver(IPositionChangeObserver observer) {
-    positionChangeObserverList.add(observer);
-  }
-  
-  void removeObserver(IPositionChangeObserver observer) {
-    positionChangeObserverList.remove(observer);
-  }
 
   @Override
   public String toString() {
@@ -57,7 +53,7 @@ public class Animal extends AbstractMapElement {
     if (map.canMoveTo(resultPosition)) {
       Vector2d oldPosition = position;
       position = resultPosition;
-      positionChangeObserverList.forEach(a -> a.positionChanged(oldPosition, resultPosition));
+      notifyObservers(oldPosition);
     }
   }
 
@@ -66,5 +62,10 @@ public class Animal extends AbstractMapElement {
     if (!placeSucceded) {
       throw new IllegalArgumentException(String.format("The position: %s is unavailable", position));
     }
+  }
+
+  @Override
+  public int zIndex() {
+    return Z_INDEX;
   }
 }

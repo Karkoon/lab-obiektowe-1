@@ -1,5 +1,10 @@
-package agh.cs.oop;
+package agh.cs.oop.worldmap;
 
+import agh.cs.oop.MapDirection;
+import agh.cs.oop.MoveDirection;
+import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.Animal;
+import agh.cs.oop.mapelement.Grass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GrassFieldTest {
 
-  private GrassField grassField;
   private final int GRASS_AMOUNT = 10;
+  private GrassField grassField;
 
   @BeforeEach
   void setUp() {
@@ -44,7 +49,7 @@ public class GrassFieldTest {
 
   @Test
   void isOccupied() {
-    Vector2d pos = new Vector2d(2, 2);
+    Vector2d pos = new Vector2d(-2, -2);
     assertFalse(grassField.isOccupied(pos));
     new Animal(grassField, pos);
     assertTrue(grassField.isOccupied(pos));
@@ -65,7 +70,10 @@ public class GrassFieldTest {
       lowerLeftCorner = position.lowerLeft(lowerLeftCorner);
       upperRightCorner = position.upperRight(upperRightCorner);
     }
-    assertEquals(new MapBounds(lowerLeftCorner, upperRightCorner), grassField.provideMapBounds());
+    MapBoundary expected = new MapBoundary();
+    expected.addToMapBoundary(new Grass(lowerLeftCorner));
+    expected.addToMapBoundary(new Grass(upperRightCorner));
+    assertEquals(expected, grassField.provideMapBoundary());
   }
 
   @Test

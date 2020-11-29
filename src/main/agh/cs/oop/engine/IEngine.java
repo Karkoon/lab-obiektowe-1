@@ -1,4 +1,4 @@
-package agh.cs.oop;
+package agh.cs.oop.engine;
 
 /**
  * The interface responsible for managing the moves of the animals.

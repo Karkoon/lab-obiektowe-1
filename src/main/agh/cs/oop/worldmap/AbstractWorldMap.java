@@ -1,5 +1,10 @@
-package agh.cs.oop;
+package agh.cs.oop.worldmap;
 
+import agh.cs.oop.IPositionChangeObserver;
+import agh.cs.oop.MapVisualizer;
+import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.Animal;
+import agh.cs.oop.mapelement.IMapElement;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -10,20 +15,17 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
   private final MapVisualizer mapVisualizer;
 
   public AbstractWorldMap() {
-    elementsMap = new LinkedHashMap<>();
-    mapVisualizer = new MapVisualizer(this);
+    this.elementsMap = new LinkedHashMap<>();
+    this.mapVisualizer = new MapVisualizer(this);
   }
+
+  public abstract IMapBoundary provideMapBoundary();
 
   @Override
   public String toString() {
-    MapBounds mapBounds = provideMapBounds();
-    return mapVisualizer.draw(mapBounds.getLowerLeftCorner(), mapBounds.getRightUpperCorner());
+    IMapBoundary mapBoundary = provideMapBoundary();
+    return mapVisualizer.draw(mapBoundary.getLowerLeftCorner(), mapBoundary.getUpperRightCorner());
   }
-
-  /**
-   * Override to provide bounds of the map fragment to be rendered.
-   */
-  protected abstract MapBounds provideMapBounds();
 
   @Override
   public boolean canMoveTo(Vector2d position) {
@@ -34,9 +36,10 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
   public boolean place(Animal animal) {
     if (canMoveTo(animal.getPosition())) {
       elementsMap.put(animal.getPosition(), animal);
+      animal.addObserver(this);
       return true;
     }
-    return false;
+    throw new IllegalArgumentException(String.format("%s is unavailable", animal.getPosition().toString()));
   }
 
   @Override
@@ -50,9 +53,8 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
   }
 
   @Override
-  public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-    IMapElement movingElement = elementsMap.get(oldPosition);
+  public void positionChanged(Vector2d oldPosition, Vector2d newPosition, IMapElement changedElement) {
     elementsMap.remove(oldPosition);
-    elementsMap.put(newPosition, movingElement);
+    elementsMap.put(newPosition, changedElement);
   }
 }

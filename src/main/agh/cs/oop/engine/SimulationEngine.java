@@ -1,4 +1,9 @@
-package agh.cs.oop;
+package agh.cs.oop.engine;
+
+import agh.cs.oop.MoveDirection;
+import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.Animal;
+import agh.cs.oop.worldmap.AbstractWorldMap;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +18,6 @@ public class SimulationEngine implements IEngine {
     animals = new LinkedList<>();
     for (Vector2d position : initialAnimalPositions) {
       Animal animal = new Animal(map, position);
-      animal.addObserver(map);
       animals.add(animal);
     }
   }

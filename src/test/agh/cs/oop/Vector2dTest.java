@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Vector2dTest {
 
-
   private static Vector2d v6_10;
   private static Vector2d v2_4;
   private static Vector2d vn2_7;

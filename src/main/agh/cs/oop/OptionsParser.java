@@ -11,13 +11,13 @@ public class OptionsParser {
       .toArray(MoveDirection[]::new);
   }
 
-  private MoveDirection toMoveDirection(String str) {
+  public MoveDirection toMoveDirection(String str) {
     return switch (str) {
       case "f", "forward" -> MoveDirection.FORWARD;
       case "b", "backward" -> MoveDirection.BACKWARD;
       case "r", "right" -> MoveDirection.RIGHT;
       case "l", "left" -> MoveDirection.LEFT;
-      default -> null;
+      default -> throw new IllegalArgumentException(String.format("%s is not a legal move specification", str));
     };
   }
 }

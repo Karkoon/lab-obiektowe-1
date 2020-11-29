@@ -1,5 +1,7 @@
-package agh.cs.oop;
+package agh.cs.oop.mapelement;
 
+import agh.cs.oop.MoveDirection;
+import agh.cs.oop.worldmap.RectangularMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

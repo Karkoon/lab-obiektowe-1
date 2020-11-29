@@ -1,4 +1,7 @@
-package agh.cs.oop;
+package agh.cs.oop.worldmap;
+
+import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.Animal;
 
 /**
  * The interface responsible for interacting with the map of the world.

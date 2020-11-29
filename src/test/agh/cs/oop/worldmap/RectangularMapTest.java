@@ -1,5 +1,9 @@
-package agh.cs.oop;
+package agh.cs.oop.worldmap;
 
+import agh.cs.oop.MapDirection;
+import agh.cs.oop.MoveDirection;
+import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.Animal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -66,7 +70,7 @@ class RectangularMapTest {
 
   @Test
   void provideMapBounds() {
-    assertEquals(new MapBounds(new Vector2d(0, 0), new Vector2d(9, 9)), rectangularMap.provideMapBounds());
+    assertEquals(new NondynamicMapBoundary(new Vector2d(0, 0), new Vector2d(9, 9)), rectangularMap.provideMapBoundary());
   }
 
   @Test

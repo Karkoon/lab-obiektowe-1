@@ -1,5 +1,7 @@
 package agh.cs.oop;
 
+import agh.cs.oop.worldmap.IWorldMap;
+
 /**
  * The map visualizer converts the {@link IWorldMap} map into a string
  * representation.
