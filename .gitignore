@@ -1,3 +1,11 @@
 # Project exclude paths
 /out/
 ./.idea/dbnavigator.xml
+
+gradle-local.properties
+gpg/
+.gradle/
+build/
+*.class
+*.log
+*.settings.xml
