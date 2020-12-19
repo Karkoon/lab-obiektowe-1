@@ -11,4 +11,6 @@ public interface IMapElement {
    * sorted list because there is no natural way to order types.
    */
   int zIndex();
+
+  int getEnergy();
 }

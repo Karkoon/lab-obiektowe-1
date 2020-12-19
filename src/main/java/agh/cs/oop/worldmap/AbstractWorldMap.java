@@ -6,6 +6,8 @@ import agh.cs.oop.Vector2d;
 import agh.cs.oop.mapelement.Animal;
 import agh.cs.oop.mapelement.IMapElement;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -48,8 +50,8 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
   }
 
   @Override
-  public Object objectAt(Vector2d position) {
-    return elementsMap.get(position);
+  public Collection<IMapElement> objectAt(Vector2d position) {
+    return Collections.singletonList(elementsMap.get(position));
   }
 
   @Override

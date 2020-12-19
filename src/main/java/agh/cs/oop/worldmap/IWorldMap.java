@@ -2,6 +2,9 @@ package agh.cs.oop.worldmap;
 
 import agh.cs.oop.Vector2d;
 import agh.cs.oop.mapelement.Animal;
+import agh.cs.oop.mapelement.IMapElement;
+
+import java.util.Collection;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -42,5 +45,7 @@ public interface IWorldMap {
    * @param position The position of the object.
    * @return Object or null if the position is not occupied.
    */
-  Object objectAt(Vector2d position);
+  Collection<IMapElement> objectAt(Vector2d position);
+
+  IMapBoundary provideMapBoundary();
 }

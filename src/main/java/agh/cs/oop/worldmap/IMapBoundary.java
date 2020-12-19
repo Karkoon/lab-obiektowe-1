@@ -8,4 +8,5 @@ public interface IMapBoundary {
 
   Vector2d getUpperRightCorner();
 
+  Vector2d randomPosition();
 }

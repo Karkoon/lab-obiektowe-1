@@ -3,6 +3,7 @@ package agh.cs.oop.worldmap;
 import agh.cs.oop.Vector2d;
 
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class NondynamicMapBoundary implements IMapBoundary {
 
@@ -22,6 +23,13 @@ public class NondynamicMapBoundary implements IMapBoundary {
   @Override
   public Vector2d getUpperRightCorner() {
     return upperRightCorner;
+  }
+
+  @Override
+  public Vector2d randomPosition() {
+    return new Vector2d(
+      ThreadLocalRandom.current().nextInt(lowerLeftCorner.x, upperRightCorner.x),
+      ThreadLocalRandom.current().nextInt(lowerLeftCorner.y, upperRightCorner.y));
   }
 
   @Override

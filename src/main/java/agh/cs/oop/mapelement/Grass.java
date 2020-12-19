@@ -19,4 +19,9 @@ public class Grass extends AbstractMapElement {
   public int zIndex() {
     return Z_INDEX;
   }
+
+  @Override
+  public int getEnergy() {
+    return 1;
+  }
 }
