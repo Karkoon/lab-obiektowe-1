@@ -4,7 +4,10 @@ import agh.cs.oop.Genotype;
 import agh.cs.oop.MapDirection;
 import agh.cs.oop.MoveDirection;
 import agh.cs.oop.Vector2d;
+import agh.cs.oop.util.Enums;
 import agh.cs.oop.worldmap.IWorldMap;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Animal extends AbstractMapElement {
 
@@ -12,11 +15,12 @@ public class Animal extends AbstractMapElement {
   private final static int Z_INDEX = 10;
   private final Genotype genotype;
   private final IWorldMap map;
-  private MapDirection orientation = MapDirection.NORTH; // random orientation
+  private MapDirection orientation = Enums.getRandomEnum(MapDirection.class); // random orientation
   private int energy = STARTING_ENERGY;
 
   public Animal(IWorldMap map, Vector2d initialPosition, Genotype genotype) {
     super(initialPosition);
+
     this.genotype = genotype;
     this.map = map;
     placeOnMap(map);
@@ -69,6 +73,7 @@ public class Animal extends AbstractMapElement {
     if (map.canMoveTo(resultPosition)) {
       Vector2d oldPosition = position;
       position = resultPosition; // tu do modyfikacji jeśli mapa ma móc się zawijać
+      spendEnergyOnMovement();
       notifyObservers(oldPosition); // można byłoby to zrobić tak, że mapa mogłaby zwrócić proponowaną pozycję
     }
   }
@@ -91,9 +96,13 @@ public class Animal extends AbstractMapElement {
   }
 
   public int spendEnergyOnReproduction() {
-    int energyReduction = STARTING_ENERGY / 2;
+    int energyReduction = energy / 4;
     energy -= energyReduction;
     return energyReduction;
+  }
+
+  private void spendEnergyOnMovement() {
+    energy -= 1;
   }
 
   public void addEnergy(int additionalEnergy) {

@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class AnimalGenerator {
 
-  public static final int PROCREATION_ENERGY_REQUIREMENT = Animal.STARTING_ENERGY / 2; //połowa energii początkowej startEnergy?
+  public static final int PROCREATION_ENERGY_REQUIREMENT = Animal.STARTING_ENERGY / 2;
   private final static Random rand = new Random();
   private final IWorldMap map;
-  private ArrayList<Animal> animals;
+  private List<Animal> animals;
 
   public AnimalGenerator(IWorldMap map) {
     this.map = map;
@@ -36,34 +37,37 @@ public class AnimalGenerator {
     return new Animal(map, position);
   }
 
-  public void tryToProcreateAt(Vector2d position) { // TODO: 19.12.2020 rozmnażają się te, które mają największą energię
-    Animal parentA = (Animal) map.objectAt(position)
+  public void tryToProcreateAt(Vector2d position) {
+    List<IMapElement> topTwoEligibleAnimalsForReproduction = map.objectAt(position)
       .stream()
-      .filter(a -> a instanceof Animal && a.getEnergy() >= PROCREATION_ENERGY_REQUIREMENT)
-      .max(Comparator.comparingInt(IMapElement::getEnergy)).orElse(null);
-    if (parentA != null) {
-      Animal parentB = (Animal) map.objectAt(parentA.getPosition())
-        .stream()
-        .filter(a -> a instanceof Animal && a != parentA && a.getEnergy() >= PROCREATION_ENERGY_REQUIREMENT)
-        .max(Comparator.comparingInt(IMapElement::getEnergy)).orElse(null);
-      if (parentB != null) {
-        determineChildPosition(parentA.getPosition());
-        Animal child = createAnimalFromParents(parentA, parentB);
-        animals.add(child);
-      }
+      .filter(a -> a instanceof Animal && hasSufficientEnergyForProcreation(a))
+      .sorted(Comparator.comparingInt(IMapElement::getEnergy))
+      .limit(2)
+      .collect(Collectors.toList());
+    if (topTwoEligibleAnimalsForReproduction.size() == 2) {
+      Animal parentA = (Animal) topTwoEligibleAnimalsForReproduction.get(0);
+      Animal parentB = (Animal) topTwoEligibleAnimalsForReproduction.get(1);
+      Animal child = createAnimalFromParents(parentA, parentB);
+      animals.add(child);
     }
   }
 
   private Animal createAnimalFromParents(Animal parentA, Animal parentB) {
-    if (parentA.getEnergy() >= PROCREATION_ENERGY_REQUIREMENT && parentB.getEnergy() >= PROCREATION_ENERGY_REQUIREMENT) {
-      parentA.spendEnergyOnReproduction();
-      parentB.spendEnergyOnReproduction();
-      Vector2d childPosition = determineChildPosition(parentA.getPosition());
-      Animal child = new Animal(map, childPosition, new Genotype(parentA.getGenotype(), parentB.getGenotype()));
-      child.forceMove(MoveDirection.LEFT);
-      child.addEnergy(parentA.getEnergy() / 4 + parentB.getEnergy() / 4);
+    if (!(hasSufficientEnergyForProcreation(parentA) && hasSufficientEnergyForProcreation(parentB))) {
+      throw new IllegalStateException(
+        String.format("Parents don't meet the sufficient energy requirement %d - they have only ParentA: %d, ParentB: %d units of energy.",
+          PROCREATION_ENERGY_REQUIREMENT, parentA.getEnergy(), parentB.getEnergy()));
     }
-    return null; // TODO: 19.12.2020
+    Animal child = new Animal(
+      map,
+      determineChildPosition(parentA.getPosition()),
+      new Genotype(parentA.getGenotype(), parentB.getGenotype()));
+    child.addEnergy(parentA.spendEnergyOnReproduction() + parentB.spendEnergyOnReproduction());
+    return child;
+  }
+
+  private boolean hasSufficientEnergyForProcreation(IMapElement mapElement) {
+    return mapElement.getEnergy() >= PROCREATION_ENERGY_REQUIREMENT;
   }
 
   private Vector2d determineChildPosition(Vector2d parentPos) {

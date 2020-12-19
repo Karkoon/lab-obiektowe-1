@@ -8,11 +8,10 @@ import java.util.List;
 
 public class SimulationEngine implements IEngine {
 
-  private final static int NUMBER_OF_ANIMALS = 20;
+  private final static int NUMBER_OF_ANIMALS = 10;
   private final List<Animal> animals;
   private final AnimalGenerator generator;
   private final IWorldMap map;
-  private final boolean simulationRunning = true; // TODO: 19.12.2020 create some end conditions for the simulation to have it actually end
 
   public SimulationEngine(IWorldMap map) {
     this.generator = new AnimalGenerator(map);
@@ -22,20 +21,35 @@ public class SimulationEngine implements IEngine {
 
   @Override
   public void run() {
-    while (simulationRunning) {
-      for (int i = 0; i < animals.size(); i++) {
-        Animal animal = animals.get(i);
-        generator.tryToProcreateAt(animal.getPosition());
-        animal.move(); // TODO: 19.12.2020 get the move direction from the animals genotype
-      }
+    while (animals.size() != 0) {
+      cleanUpDeadAnimals();
+      moveAnimals();
+      tryToProcreateAnimals();
       System.out.println(map);
-      try {
+
+      /*try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
         e.printStackTrace();
-      }
+      }*/
+    }
+
+  }
+
+  private void moveAnimals() {
+    for (int i = 0; i < animals.size(); i++) {
+      animals.get(i).move();
     }
   }
 
+  private void tryToProcreateAnimals() {
+    for (int i = 0; i < animals.size(); i++) {
+      generator.tryToProcreateAt(animals.get(i).getPosition());
+    }
+  }
+
+  private void cleanUpDeadAnimals() {
+    animals.removeIf(a -> a.getEnergy() == 0);
+  }
 
 }

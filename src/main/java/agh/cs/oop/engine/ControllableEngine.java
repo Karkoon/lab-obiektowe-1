@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class ControllableEngine implements IEngine {
 
-  private static final int NUMBER_OF_ANIMALS = 20;
+  private static final int NUMBER_OF_ANIMALS = 50;
 
   private final Animal controlledAnimal;
   private final IWorldMap map;
