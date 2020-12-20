@@ -1,18 +1,32 @@
 package agh.cs.oop.graphics;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ScrollPane;
 
-public class Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+
+public class Controller implements Initializable {
+
   @FXML
-  Label helloLabel;
+  Canvas leftCanvas;
+  @FXML
+  Canvas rightCanvas;
 
-  String[] greetings = {"Hello", "What's up", "Howdy", "Yo"};
-  int currentGreetingIndex = 0;
+  public void exit() {
+    System.exit(0);
+  }
 
-  public void changeGreeting() {
-    currentGreetingIndex = (currentGreetingIndex + 1) % greetings.length;
-    helloLabel.setText(greetings[currentGreetingIndex]);
+  @FXML
+  ScrollPane leftScrollPane;
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    new GameLoopTimer(leftCanvas).start();
+    new GameLoopTimer(rightCanvas).start();
   }
 }
 

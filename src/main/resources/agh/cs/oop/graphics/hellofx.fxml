@@ -1,26 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<BorderPane fx:id="borderPane" prefHeight="320.0" prefWidth="480.0" stylesheets="@hellofx.css" fx:controller="agh.cs.oop.graphics.Controller" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <ImageView fx:id="helloImage" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@javafx.png" />
-         </image>
-      </ImageView>
-   </center>
-   <top>
-      <Label fx:id="helloLabel" alignment="CENTER" contentDisplay="CENTER" text="Hello" textAlignment="CENTER" BorderPane.alignment="CENTER">
-      </Label>
-   </top>
-   <bottom>
-      <Button fx:id="changeGreetingButton" alignment="CENTER" mnemonicParsing="false" onAction="#changeGreeting" text="Change greeting" textAlignment="CENTER" BorderPane.alignment="CENTER_RIGHT">
-      </Button>
-   </bottom>
-</BorderPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agh.cs.oop.graphics.Controller">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <HBox alignment="CENTER" prefHeight="720.0" prefWidth="1332.0">
+         <children>
+            <SplitPane dividerPositions="0.5" HBox.hgrow="ALWAYS">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <ScrollPane fx:id="leftScrollPane" layoutY="2.0" prefHeight="542.0" prefWidth="661.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <Canvas fx:id="leftCanvas" height="699.0" width="642.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="449.0">
+                     <children>
+                        <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <Canvas fx:id="rightCanvas" height="699.0" width="642.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </HBox>
+      <HBox prefHeight="250.0" prefWidth="1500.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Label" />
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Button mnemonicParsing="false" text="Button" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+                  <Label text="Label" />
+               </children>
+            </VBox>
+         </children></HBox>
+   </children>
+</VBox>

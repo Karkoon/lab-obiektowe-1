@@ -2,7 +2,7 @@ package agh.cs.oop.worldmap;
 
 import agh.cs.oop.Vector2d;
 import agh.cs.oop.mapelement.Animal;
-import agh.cs.oop.mapelement.IMapElement;
+import agh.cs.oop.mapelement.Grass;
 
 import java.util.Collection;
 
@@ -22,14 +22,6 @@ public interface IWorldMap {
   boolean canMoveTo(Vector2d position);
 
   /**
-   * Place a animal on the map.
-   *
-   * @param animal The animal to place on the map.
-   * @return True if the animal was placed. The animal cannot be placed if the map is already occupied.
-   */
-  boolean place(Animal animal);
-
-  /**
    * Return true if given position on the map is occupied. Should not be
    * confused with canMove since there might be empty positions where the animal
    * cannot move.
@@ -40,12 +32,32 @@ public interface IWorldMap {
   boolean isOccupied(Vector2d position);
 
   /**
+   * Place a animal on the map.
+   *
+   * @param animal The animal to place on the map.
+   * @return True if the animal was placed. The animal cannot be placed if the map is already occupied.
+   */
+  boolean place(Animal animal);
+
+  /**
    * Return an object at a given position.
    *
    * @param position The position of the object.
    * @return Object or null if the position is not occupied.
    */
-  Collection<IMapElement> objectAt(Vector2d position);
+  Collection objectAt(Vector2d position);
 
   IMapBoundary provideMapBoundary();
+
+  boolean removeAnimalBody(Animal animal);
+
+  boolean pickUpGrass(Grass grass);
+
+  boolean plant(Grass grass);
+
+  Collection<Animal> animalsAt(Vector2d position);
+
+  Grass grassAt(Vector2d position);
+
+  IMapBoundary provideJungleBoundary();
 }

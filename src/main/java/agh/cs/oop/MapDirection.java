@@ -1,10 +1,14 @@
 package agh.cs.oop;
 
-public enum MapDirection {
+public enum MapDirection { // TODO: 19.12.2020 remove dir as gui
   NORTH("^", new Vector2d(0, 1)),
+  NORTHEAST("/", new Vector2d(1, 1)),
   EAST(">", new Vector2d(1, 0)),
+  SOUTHEAST("\\", new Vector2d(1, -1)),
   SOUTH("v", new Vector2d(0, -1)),
-  WEST("<", new Vector2d(-1, 0));
+  SOUTHWEST("/", new Vector2d(-1, -1)),
+  WEST("<", new Vector2d(-1, 0)),
+  NORTHWEST("\\", new Vector2d(-1, 1));
 
   private final String friendlyName;
   private final Vector2d unitVector;
@@ -31,5 +35,11 @@ public enum MapDirection {
 
   public Vector2d toUnitVector() {
     return unitVector;
+  }
+
+  private final static int DEGREE_GRANULARITY = 45;
+
+  public int toDegrees() {
+    return this.ordinal() * DEGREE_GRANULARITY;
   }
 }

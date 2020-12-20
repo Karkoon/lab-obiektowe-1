@@ -24,6 +24,7 @@ test {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     implementation 'com.google.guava:guava:30.1-jre'
+    compile 'com.google.code.gson:gson:2.8.6'
 }
 
 

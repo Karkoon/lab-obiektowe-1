@@ -1,7 +1,7 @@
 package agh.cs.oop;
 
 public enum MoveDirection {
-  FORWARD, FORWARD_RIGHT, FORWARD_LEFT,
+  FORWARD,
   RIGHT, LEFT,
-  BACKWARD, BACKWARD_RIGHT, BACKWARD_LEFT
+  BACKWARD
 }

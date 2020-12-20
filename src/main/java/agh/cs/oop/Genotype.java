@@ -17,6 +17,7 @@ public class Genotype {
     sortAndRepairGenotype();
   }
 
+  // TODO: 20.12.2020 tu chyba ok
   public Genotype(Genotype genotypeA, Genotype genotypeB) {
     int partingIndexA = rand.nextInt(1, GENOTYPE_LENGTH - 3);
     int partingIndexB;

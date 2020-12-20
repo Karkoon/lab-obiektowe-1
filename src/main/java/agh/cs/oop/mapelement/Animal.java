@@ -7,32 +7,38 @@ import agh.cs.oop.Vector2d;
 import agh.cs.oop.util.Enums;
 import agh.cs.oop.worldmap.IWorldMap;
 
-import java.util.concurrent.ThreadLocalRandom;
+public class Animal extends AbstractMapElement implements Comparable<Animal> {
 
-public class Animal extends AbstractMapElement {
+  public static final int STARTING_ENERGY = 50; // czy coś
 
-  public static final int STARTING_ENERGY = 20; // czy coś
-  private final static int Z_INDEX = 10;
   private final Genotype genotype;
   private final IWorldMap map;
+
   private MapDirection orientation = Enums.getRandomEnum(MapDirection.class); // random orientation
-  private int energy = STARTING_ENERGY;
+  private int energy;
 
-  public Animal(IWorldMap map, Vector2d initialPosition, Genotype genotype) {
+  public Animal(IWorldMap map, Vector2d initialPosition, Genotype genotype, int startingEnergy) {
     super(initialPosition);
-
     this.genotype = genotype;
     this.map = map;
     placeOnMap(map);
+    this.energy = startingEnergy;
+  }
+
+  public Animal(IWorldMap map, Vector2d initialPosition, Genotype genotype) {
+    this(map, initialPosition, genotype, STARTING_ENERGY);
   }
 
   public Animal(IWorldMap map, Vector2d initialPosition) {
     this(map, initialPosition, new Genotype());
   }
 
-
   public Animal(IWorldMap map) {
     this(map, new Vector2d(2, 2));
+  }
+
+  public MapDirection getOrientation() {
+    return orientation;
   }
 
   @Override
@@ -40,18 +46,18 @@ public class Animal extends AbstractMapElement {
     return orientation.toString();
   }
 
-  public void move() {
-    MoveDirection direction = MoveDirection.values()[getGenotype().getRandomGene()];
-    switch (direction) {
-      case LEFT, RIGHT -> rotate(direction);
-      case FORWARD, BACKWARD -> changePosition(direction);
+  // ruch to obrót i ruch
+  public void move() { //
+    for (int i = 0; i < getGenotype().getRandomGene(); i++) {
+      rotate(MoveDirection.RIGHT);
     }
+    changePosition(MoveDirection.FORWARD);
   }
 
   public void forceMove(MoveDirection direction) {
     switch (direction) {
       case LEFT, RIGHT -> rotate(direction);
-      case FORWARD, BACKWARD -> changePosition(direction);
+      default -> changePosition(direction);
     }
   }
 
@@ -71,10 +77,8 @@ public class Animal extends AbstractMapElement {
       default -> throw new IllegalArgumentException("Illegal direction value. It has to be either FORWARD or BACKWARD.");
     }
     if (map.canMoveTo(resultPosition)) {
-      Vector2d oldPosition = position;
       position = resultPosition; // tu do modyfikacji jeśli mapa ma móc się zawijać
       spendEnergyOnMovement();
-      notifyObservers(oldPosition); // można byłoby to zrobić tak, że mapa mogłaby zwrócić proponowaną pozycję
     }
   }
 
@@ -83,11 +87,6 @@ public class Animal extends AbstractMapElement {
     if (!placeSucceded) {
       throw new IllegalArgumentException(String.format("The position: %s is unavailable", position));
     }
-  }
-
-  @Override
-  public int zIndex() {
-    return Z_INDEX;
   }
 
   @Override
@@ -111,5 +110,10 @@ public class Animal extends AbstractMapElement {
 
   public Genotype getGenotype() {
     return this.genotype;
+  }
+
+  @Override
+  public int compareTo(Animal o) {
+    return this == o ? 0 : this.getEnergy() - o.getEnergy();
   }
 }
