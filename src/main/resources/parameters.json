@@ -1,0 +1,12 @@
+{
+  "width": 50,
+  "height": 50,
+  "startEnergy": 50,
+  "moveEnergy": 3,
+  "plantEnergy": 70,
+  "jungleRatio": 0.3
+  /* numberOfAnimals is in agh.cs.oop.app.GameLoop  */
+  /* numberOfGrass is in agh.cs.oop.app.GameLoop  */
+  /* pixel size (cell width/heigth) is in agh.cs.oop.app.MapRenderer */
+  /* these parameterers weren't in the specification but seem pretty handy to have */
+}

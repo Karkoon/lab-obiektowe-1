@@ -3,6 +3,7 @@ package agh.cs.oop.worldmap;
 import agh.cs.oop.Vector2d;
 import agh.cs.oop.mapelement.Animal;
 import agh.cs.oop.mapelement.Grass;
+import agh.cs.oop.mapelement.IMapElement;
 
 import java.util.Collection;
 
@@ -45,9 +46,9 @@ public interface IWorldMap {
    * @param position The position of the object.
    * @return Object or null if the position is not occupied.
    */
-  Collection objectAt(Vector2d position);
+  Collection<IMapElement> objectAt(Vector2d position);
 
-  IMapBoundary provideMapBoundary();
+  IMapBoundary getMapBoundary();
 
   boolean removeAnimalBody(Animal animal);
 
@@ -59,5 +60,5 @@ public interface IWorldMap {
 
   Grass grassAt(Vector2d position);
 
-  IMapBoundary provideJungleBoundary();
+  IMapBoundary getJungleBoundary();
 }

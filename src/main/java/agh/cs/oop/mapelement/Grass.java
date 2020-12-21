@@ -5,8 +5,11 @@ import agh.cs.oop.worldmap.IWorldMap;
 
 public class Grass extends AbstractMapElement {
 
-  public Grass(IWorldMap worldMap, Vector2d position) {
+  private final int PLANT_ENERGY;
+
+  public Grass(IWorldMap worldMap, Vector2d position, int plantEnergy) {
     super(position);
+    this.PLANT_ENERGY = plantEnergy;
     worldMap.plant(this);
   }
 
@@ -17,6 +20,13 @@ public class Grass extends AbstractMapElement {
 
   @Override
   public int getEnergy() {
-    return 40;
+    return PLANT_ENERGY;
+  }
+
+  private final static int Z_INDEX = -1;
+
+  @Override
+  public int zIndex() {
+    return Z_INDEX;
   }
 }

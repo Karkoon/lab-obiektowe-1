@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="245.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agh.cs.oop.app.AnimalReportController">
+   <children>
+      <VBox alignment="CENTER" layoutX="13.0" layoutY="16.0" prefHeight="214.0" prefWidth="541.0" spacing="10.0">
+         <children>
+            <Label fx:id="genotype" text="Label" />
+            <Label fx:id="children" text="Label" />
+            <Label fx:id="descendants" text="Label" />
+            <Label fx:id="deathEpoch" text="Label" />
+            <Region prefHeight="16.0" prefWidth="275.0" />
+            <Button mnemonicParsing="false" onAction="#close" text="Close" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

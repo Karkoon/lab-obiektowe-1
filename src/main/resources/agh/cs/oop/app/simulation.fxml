@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="466.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agh.cs.oop.app.SimulationController">
+    <VBox alignment="CENTER" prefHeight="1049.0" prefWidth="795.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+            <ScrollPane pannable="true" prefHeight="896.0" prefWidth="795.0">
+                <content>
+                    <Canvas fx:id="canvas" height="817.0" onMouseClicked="#trySelectingAnimal" width="726.0" />
+                </content>
+            </ScrollPane>
+         <HBox alignment="TOP_CENTER" prefHeight="131.0" prefWidth="600.0" spacing="100.0">
+            <children>
+                  <VBox alignment="TOP_CENTER" spacing="5.0">
+                      <Button mnemonicParsing="false" onAction="#pause" text="Pause/Unpasue" />
+                  <Button mnemonicParsing="false" onAction="#saveSimulationToFile" text="Save simulation" />
+                      <Label fx:id="allAnimals" text="Label" />
+                      <Label fx:id="allGrasses" text="Label" />
+                      <Label fx:id="domGenotype" text="Label" />
+                  </VBox>
+               <VBox alignment="TOP_CENTER" spacing="5.0">
+                  <children>
+                     <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="4.0">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#markDominatingGenotype" prefHeight="28.0" prefWidth="203.0" text="Mark dominating genotype" />
+                        </children>
+                     </HBox>
+                         <Label fx:id="averageEnergy" text="Label" />
+                         <Label fx:id="averageLifespan" text="Label" />
+                         <Label fx:id="averageChildren" text="Label" />
+                  </children>
+               </VBox>
+            </children>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin></HBox>
+        </children>
+    </VBox>
+</AnchorPane>

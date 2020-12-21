@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="178.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agh.cs.oop.app.AnimalPopupController">
+   <children>
+      <Button layoutX="171.0" layoutY="118.0" mnemonicParsing="false" onAction="#close" text="Close" />
+      <Label fx:id="genotype" alignment="CENTER" layoutX="99.0" layoutY="28.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+      <Button layoutX="50.0" layoutY="118.0" mnemonicParsing="false" onAction="#track" text="Track" />
+      <TextField fx:id="epochInput" layoutX="129.0" layoutY="66.0" prefHeight="28.0" prefWidth="129.0" />
+      <Label layoutX="14.0" layoutY="71.0" text="Epochs to pass" />
+   </children>
+</AnchorPane>

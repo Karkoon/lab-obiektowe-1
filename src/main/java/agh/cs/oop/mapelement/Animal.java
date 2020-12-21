@@ -2,82 +2,61 @@ package agh.cs.oop.mapelement;
 
 import agh.cs.oop.Genotype;
 import agh.cs.oop.MapDirection;
-import agh.cs.oop.MoveDirection;
 import agh.cs.oop.Vector2d;
 import agh.cs.oop.util.Enums;
 import agh.cs.oop.worldmap.IWorldMap;
 
-public class Animal extends AbstractMapElement implements Comparable<Animal> {
+import java.util.ArrayList;
+import java.util.List;
 
-  public static final int STARTING_ENERGY = 50; // czy coś
+public class Animal extends AbstractMapElement implements Comparable<Animal> {
 
   private final Genotype genotype;
   private final IWorldMap map;
-
-  private MapDirection orientation = Enums.getRandomEnum(MapDirection.class); // random orientation
+  private final int MOVE_ENERGY;
+  private final int birthEpoch;
+  private final List<Animal> children = new ArrayList<>(5);
+  private int deathEpoch;
+  private MapDirection orientation;
   private int energy;
 
-  public Animal(IWorldMap map, Vector2d initialPosition, Genotype genotype, int startingEnergy) {
+  public Animal(IWorldMap map, Vector2d initialPosition, int startingEnergy, int moveEnergy, int birthEpoch, Genotype genotype) {
     super(initialPosition);
     this.genotype = genotype;
     this.map = map;
     placeOnMap(map);
+    this.MOVE_ENERGY = moveEnergy;
     this.energy = startingEnergy;
+    orientation = Enums.getRandomEnum(MapDirection.class);
+    this.birthEpoch = birthEpoch;
   }
 
-  public Animal(IWorldMap map, Vector2d initialPosition, Genotype genotype) {
-    this(map, initialPosition, genotype, STARTING_ENERGY);
+  public Animal(IWorldMap map, Vector2d initialPosition, int startingEnergy, int moveEnergy, int birthEpoch) {
+    this(map, initialPosition, startingEnergy, moveEnergy, birthEpoch, new Genotype());
   }
 
-  public Animal(IWorldMap map, Vector2d initialPosition) {
-    this(map, initialPosition, new Genotype());
+  public Animal(IWorldMap map, Vector2d initialPosition, int startingEnergy, int moveEnergy) {
+    this(map, initialPosition, startingEnergy, moveEnergy, 0);
   }
 
-  public Animal(IWorldMap map) {
-    this(map, new Vector2d(2, 2));
-  }
-
-  public MapDirection getOrientation() {
-    return orientation;
-  }
-
-  @Override
-  public String toString() {
-    return orientation.toString();
-  }
-
-  // ruch to obrót i ruch
-  public void move() { //
+  public void move() {
+    if (energy < MOVE_ENERGY)
+      throw new IllegalStateException("Animal has less than required energy to move.");
     for (int i = 0; i < getGenotype().getRandomGene(); i++) {
-      rotate(MoveDirection.RIGHT);
+      rotate();
     }
-    changePosition(MoveDirection.FORWARD);
+    moveForward();
   }
 
-  public void forceMove(MoveDirection direction) {
-    switch (direction) {
-      case LEFT, RIGHT -> rotate(direction);
-      default -> changePosition(direction);
-    }
+  private void rotate() {
+    orientation = orientation.next();
   }
 
-  private void rotate(MoveDirection direction) {
-    switch (direction) {
-      case LEFT -> orientation = orientation.previous();
-      case RIGHT -> orientation = orientation.next();
-      default -> throw new IllegalArgumentException("Illegal direction value. It has to be either LEFT or RIGHT.");
-    }
-  }
-
-  private void changePosition(MoveDirection direction) {
+  private void moveForward() {
     Vector2d resultPosition;
-    switch (direction) {
-      case FORWARD -> resultPosition = position.add(orientation.toUnitVector());
-      case BACKWARD -> resultPosition = position.subtract(orientation.toUnitVector());
-      default -> throw new IllegalArgumentException("Illegal direction value. It has to be either FORWARD or BACKWARD.");
-    }
+    resultPosition = position.add(orientation.toUnitVector());
     if (map.canMoveTo(resultPosition)) {
-      position = resultPosition; // tu do modyfikacji jeśli mapa ma móc się zawijać
+      position = resultPosition;
       spendEnergyOnMovement();
     }
   }
@@ -87,6 +66,11 @@ public class Animal extends AbstractMapElement implements Comparable<Animal> {
     if (!placeSucceded) {
       throw new IllegalArgumentException(String.format("The position: %s is unavailable", position));
     }
+  }
+
+  @Override
+  public int zIndex() {
+    return getEnergy();
   }
 
   @Override
@@ -101,7 +85,7 @@ public class Animal extends AbstractMapElement implements Comparable<Animal> {
   }
 
   private void spendEnergyOnMovement() {
-    energy -= 1;
+    energy -= MOVE_ENERGY;
   }
 
   public void addEnergy(int additionalEnergy) {
@@ -115,5 +99,37 @@ public class Animal extends AbstractMapElement implements Comparable<Animal> {
   @Override
   public int compareTo(Animal o) {
     return this == o ? 0 : this.getEnergy() - o.getEnergy();
+  }
+
+  public int getBirthEpoch() {
+    return birthEpoch;
+  }
+
+  public int getNumberOfChildren() {
+    return children.size();
+  }
+
+  public void addChild(Animal child) {
+    children.add(child);
+  }
+
+  public void removeChildren() {
+    children.clear();
+  }
+
+  public int getNumberOfDescendants() {
+    return getNumberOfChildren() + children.stream().map(Animal::getNumberOfDescendants).reduce(Integer::sum).orElse(0);
+  }
+
+  public int getDeathEpoch() {
+    return deathEpoch;
+  }
+
+  public void setDeathEpoch(int deathEpoch) {
+    this.deathEpoch = deathEpoch;
+  }
+
+  public boolean isDead() {
+    return energy <= MOVE_ENERGY;
   }
 }

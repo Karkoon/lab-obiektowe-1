@@ -15,5 +15,7 @@ public abstract class AbstractMapElement implements IMapElement {
     return position;
   }
 
-
+  public void setPosition(Vector2d position) {
+    this.position = position;
+  }
 }

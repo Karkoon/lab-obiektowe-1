@@ -1,6 +1,6 @@
 package agh.cs.oop;
 
-public enum MapDirection { // TODO: 19.12.2020 remove dir as gui
+public enum MapDirection {
   NORTH("^", new Vector2d(0, 1)),
   NORTHEAST("/", new Vector2d(1, 1)),
   EAST(">", new Vector2d(1, 0)),

@@ -6,5 +6,7 @@ public interface IMapElement {
 
   Vector2d getPosition();
 
+  int zIndex();
+
   int getEnergy();
 }

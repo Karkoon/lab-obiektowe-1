@@ -2,22 +2,22 @@ package agh.cs.oop;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class Genotype {
   private final static int GENE_TYPES = 8;
   private final static int GENOTYPE_LENGTH = 32;
   private final static ThreadLocalRandom rand = ThreadLocalRandom.current();
 
-  private final byte[] data = new byte[GENOTYPE_LENGTH];
+  private final int[] data = new int[GENOTYPE_LENGTH];
 
   public Genotype() {
     for (int i = 0; i < data.length; i++) {
-      data[i] = (byte) rand.nextInt(8);
+      data[i] = rand.nextInt(8);
     }
     sortAndRepairGenotype();
   }
 
-  // TODO: 20.12.2020 tu chyba ok
   public Genotype(Genotype genotypeA, Genotype genotypeB) {
     int partingIndexA = rand.nextInt(1, GENOTYPE_LENGTH - 3);
     int partingIndexB;
@@ -46,13 +46,26 @@ public class Genotype {
     sortAndRepairGenotype();
   }
 
-  public byte getRandomGene() {
+  public int getRandomGene() {
     return data[rand.nextInt(data.length)];
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Genotype genotype = (Genotype) o;
+    return Arrays.equals(data, genotype.data);
+  }
+
+  @Override
+  public int hashCode() {
+    return Arrays.hashCode(data);
+  }
+
+  @Override
   public String toString() {
-    return Arrays.toString(this.data);
+    return Arrays.stream(data).mapToObj(String::valueOf).collect(Collectors.joining(""));
   }
 
   private void sortAndRepairGenotype() {

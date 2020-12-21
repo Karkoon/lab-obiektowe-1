@@ -13,8 +13,8 @@ javafx {
 }
 
 application {
-    setMainClassName("agh.cs.oop.graphics.Launcher")
-    applicationName = 'hellofx'
+    setMainClassName("agh.cs.oop.Launcher")
+    applicationName = 'evolution'
 }
 
 test {
@@ -24,7 +24,7 @@ test {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     implementation 'com.google.guava:guava:30.1-jre'
-    compile 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 
@@ -35,16 +35,13 @@ runtime {
     }
     jpackage {
         def currentOs = org.gradle.internal.os.OperatingSystem.current()
-/*        def imgType = currentOs.windows ? 'ico' : currentOs.macOsX ? 'icns' : 'png'
-        imageOptions += ['--icon', "src/main/resources/hellofx.$imgType"]*/
         installerOptions += ['--resource-dir', "src/main/resources"]
-        installerOptions += ['--vendor', 'Acme Corporation']
         if (currentOs.windows) {
             installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu', '--win-shortcut']
         } else if (currentOs.linux) {
-            installerOptions += ['--linux-package-name', 'hellofx', '--linux-shortcut']
+            installerOptions += ['--linux-package-name', 'evolution', '--linux-shortcut']
         } else if (currentOs.macOsX) {
-            installerOptions += ['--mac-package-name', 'hellofx']
+            installerOptions += ['--mac-package-name', 'evolution']
         }
     }
 }
