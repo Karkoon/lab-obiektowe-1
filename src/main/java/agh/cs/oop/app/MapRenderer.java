@@ -1,7 +1,7 @@
 package agh.cs.oop.app;
 
-import agh.cs.oop.Genotype;
-import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.Genotype;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.mapelement.Animal;
 import agh.cs.oop.worldmap.IMapBoundary;
 import agh.cs.oop.worldmap.IWorldMap;

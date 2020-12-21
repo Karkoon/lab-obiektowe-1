@@ -39,7 +39,7 @@ public class SaveToFileController {
 
         @Override
         public void epochPassed() {
-          if (epochsToWait == 0 || game.isStopped()) {
+          if (epochsToWait == 0 || !game.getEngine().notFinished()) {
             game.getEngine().removeEpochObserver(this);
             try {
               PrintWriter fileWriter = new PrintWriter(new FileOutputStream(path, false));

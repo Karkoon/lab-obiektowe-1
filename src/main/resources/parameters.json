@@ -1,6 +1,6 @@
 {
-  "width": 50,
-  "height": 50,
+  "width": 75,
+  "height": 75,
   "startEnergy": 50,
   "moveEnergy": 3,
   "plantEnergy": 70,
@@ -9,4 +9,6 @@
   /* numberOfGrass is in agh.cs.oop.app.GameLoop  */
   /* pixel size (cell width/heigth) is in agh.cs.oop.app.MapRenderer */
   /* these parameterers weren't in the specification but seem pretty handy to have */
+
+  /* I would suggest reading the code starting from the GameLoop class. */
 }

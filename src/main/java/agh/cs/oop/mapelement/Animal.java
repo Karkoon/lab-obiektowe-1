@@ -1,8 +1,7 @@
 package agh.cs.oop.mapelement;
 
-import agh.cs.oop.Genotype;
-import agh.cs.oop.MapDirection;
-import agh.cs.oop.Vector2d;
+import agh.cs.oop.util.MapDirection;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.util.Enums;
 import agh.cs.oop.worldmap.IWorldMap;
 

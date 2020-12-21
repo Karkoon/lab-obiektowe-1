@@ -1,6 +1,6 @@
-package agh.cs.oop;
+package agh.cs.oop.mapelement;
 
-import agh.cs.oop.mapelement.Grass;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.worldmap.IMapBoundary;
 import agh.cs.oop.worldmap.IWorldMap;
 

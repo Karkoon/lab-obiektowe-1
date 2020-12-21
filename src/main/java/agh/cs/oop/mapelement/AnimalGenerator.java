@@ -1,6 +1,7 @@
-package agh.cs.oop;
+package agh.cs.oop.mapelement;
 
-import agh.cs.oop.mapelement.Animal;
+import agh.cs.oop.util.MapDirection;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.worldmap.IWorldMap;
 
 import java.util.ArrayList;

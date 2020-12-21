@@ -1,6 +1,6 @@
 package agh.cs.oop.worldmap;
 
-import agh.cs.oop.Vector2d;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.mapelement.Animal;
 import agh.cs.oop.mapelement.Grass;
 import agh.cs.oop.mapelement.IMapElement;

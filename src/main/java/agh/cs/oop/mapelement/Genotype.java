@@ -1,4 +1,4 @@
-package agh.cs.oop;
+package agh.cs.oop.mapelement;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;

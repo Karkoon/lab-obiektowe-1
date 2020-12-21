@@ -1,7 +1,7 @@
 package agh.cs.oop.app;
 
 import agh.cs.oop.Config;
-import agh.cs.oop.Vector2d;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.engine.SimulationEngine;
 import agh.cs.oop.engine.SimulationStats;
 import agh.cs.oop.mapelement.Animal;

@@ -1,8 +1,8 @@
 package agh.cs.oop.engine;
 
-import agh.cs.oop.AnimalGenerator;
-import agh.cs.oop.GrassGenerator;
-import agh.cs.oop.Vector2d;
+import agh.cs.oop.mapelement.AnimalGenerator;
+import agh.cs.oop.mapelement.GrassGenerator;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.app.IEpochObserver;
 import agh.cs.oop.mapelement.Animal;
 import agh.cs.oop.mapelement.Grass;

@@ -1,6 +1,6 @@
 package agh.cs.oop.mapelement;
 
-import agh.cs.oop.Vector2d;
+import agh.cs.oop.util.Vector2d;
 import agh.cs.oop.worldmap.IWorldMap;
 
 public class Grass extends AbstractMapElement {

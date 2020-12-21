@@ -1,6 +1,6 @@
 package agh.cs.oop.engine;
 
-import agh.cs.oop.Genotype;
+import agh.cs.oop.mapelement.Genotype;
 import agh.cs.oop.mapelement.Animal;
 import agh.cs.oop.util.Pair;
 import javafx.beans.property.DoubleProperty;
